@@ -1,0 +1,31 @@
+# 가상 환경
+/venv
+/env
+
+# 데이터베이스
+*.sqlite3
+
+# 파이썬 캐시 파일
+__pycache__/
+*.py[cod]
+
+# 로그 파일
+*.log
+
+# 로컬 설정 파일
+local_settings.py
+
+# 미디어 및 정적 파일 (개발 환경에서)
+/media
+/static
+
+# 시크릿 키 및 환경 변수
+.env
+
+# IDE 관련 파일
+.vscode/
+.idea/
+
+# 운영체제 관련 파일
+.DS_Store
+Thumbs.db
