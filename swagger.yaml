@@ -1,365 +1,309 @@
-openapi: 3.0.2
+swagger: '2.0'
 info:
-  title: ''
-  version: ''
+  title: 광운대학교 온라인 투표 시스템 API
+  description: XRPL를 이용한 광운대학교 온라인 투표 시스템 API
+  version: v1
+host: 127.0.0.1:8000
+schemes:
+- http
+basePath: /
+consumes:
+- application/json
+produces:
+- application/json
+securityDefinitions:
+  Basic:
+    type: basic
+security:
+- Basic: []
 paths:
-  /users/profile/{user}/:
-    get:
-      operationId: retrieveProfile
-      description: ''
-      parameters:
-      - name: user
-        in: path
-        required: true
-        description: A unique value identifying this profile.
-        schema:
-          type: string
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Profile'
-          description: ''
-      tags:
-      - users
-    put:
-      operationId: updateProfile
-      description: ''
-      parameters:
-      - name: user
-        in: path
-        required: true
-        description: A unique value identifying this profile.
-        schema:
-          type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Profile'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/Profile'
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/Profile'
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Profile'
-          description: ''
-      tags:
-      - users
-    patch:
-      operationId: partialUpdateProfile
-      description: ''
-      parameters:
-      - name: user
-        in: path
-        required: true
-        description: A unique value identifying this profile.
-        schema:
-          type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Profile'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/Profile'
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/Profile'
-      responses:
-        '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Profile'
-          description: ''
-      tags:
-      - users
   /posts/:
     get:
-      operationId: listPosts
+      operationId: posts_list
       description: ''
       parameters: []
       responses:
         '200':
-          content:
-            application/json:
-              schema:
-                type: array
-                items:
-                  $ref: '#/components/schemas/Post'
           description: ''
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Post'
       tags:
       - posts
     post:
-      operationId: createPost
-      description: ''
-      parameters: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Post'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/Post'
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/Post'
-      responses:
-        '201':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Post'
-          description: ''
-      tags:
-      - posts
-  /posts/{id}/:
-    get:
-      operationId: retrievePost
+      operationId: posts_create
       description: ''
       parameters:
-      - name: id
-        in: path
+      - name: data
+        in: body
         required: true
-        description: A unique integer value identifying this post.
         schema:
-          type: string
+          $ref: '#/definitions/Post'
+      responses:
+        '201':
+          description: ''
+          schema:
+            $ref: '#/definitions/Post'
+      tags:
+      - posts
+    parameters: []
+  /posts/{id}/:
+    get:
+      operationId: posts_read
+      description: ''
+      parameters: []
       responses:
         '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Post'
           description: ''
+          schema:
+            $ref: '#/definitions/Post'
       tags:
       - posts
     put:
-      operationId: updatePost
+      operationId: posts_update
       description: ''
       parameters:
-      - name: id
-        in: path
+      - name: data
+        in: body
         required: true
-        description: A unique integer value identifying this post.
         schema:
-          type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Post'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/Post'
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/Post'
+          $ref: '#/definitions/Post'
       responses:
         '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Post'
           description: ''
+          schema:
+            $ref: '#/definitions/Post'
       tags:
       - posts
     patch:
-      operationId: partialUpdatePost
+      operationId: posts_partial_update
       description: ''
       parameters:
-      - name: id
-        in: path
+      - name: data
+        in: body
         required: true
-        description: A unique integer value identifying this post.
         schema:
-          type: string
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Post'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/Post'
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/Post'
+          $ref: '#/definitions/Post'
       responses:
         '200':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Post'
           description: ''
+          schema:
+            $ref: '#/definitions/Post'
       tags:
       - posts
     delete:
-      operationId: destroyPost
+      operationId: posts_delete
       description: ''
-      parameters:
-      - name: id
-        in: path
-        required: true
-        description: A unique integer value identifying this post.
-        schema:
-          type: string
+      parameters: []
       responses:
         '204':
           description: ''
       tags:
       - posts
-  /users/register/:
-    post:
-      operationId: createUser
-      description: ''
-      parameters: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Register'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/Register'
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/Register'
-      responses:
-        '201':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Register'
-          description: ''
-      tags:
-      - users
+    parameters:
+    - name: id
+      in: path
+      description: A unique integer value identifying this post.
+      required: true
+      type: integer
   /users/login/:
     post:
-      operationId: createLogin
+      operationId: users_login_create
       description: ''
-      parameters: []
-      requestBody:
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/Login'
-          application/x-www-form-urlencoded:
-            schema:
-              $ref: '#/components/schemas/Login'
-          multipart/form-data:
-            schema:
-              $ref: '#/components/schemas/Login'
+      parameters:
+      - name: data
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/Login'
       responses:
         '201':
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Login'
           description: ''
+          schema:
+            $ref: '#/definitions/Login'
       tags:
       - users
-components:
-  schemas:
-    Profile:
-      type: object
-      properties:
-        nickname:
-          type: string
-          maxLength: 128
-        department:
-          type: string
-          maxLength: 128
-        image:
-          type: string
-          format: binary
-      required:
-      - nickname
-      - department
-    Post:
-      type: object
-      properties:
-        pk:
+    parameters: []
+  /users/profile/{user}/:
+    get:
+      operationId: users_profile_read
+      description: ''
+      parameters: []
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/Profile'
+      tags:
+      - users
+    put:
+      operationId: users_profile_update
+      description: ''
+      parameters:
+      - name: data
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/Profile'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/Profile'
+      tags:
+      - users
+    patch:
+      operationId: users_profile_partial_update
+      description: ''
+      parameters:
+      - name: data
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/Profile'
+      responses:
+        '200':
+          description: ''
+          schema:
+            $ref: '#/definitions/Profile'
+      tags:
+      - users
+    parameters:
+    - name: user
+      in: path
+      description: A unique value identifying this profile.
+      required: true
+      type: string
+  /users/register/:
+    post:
+      operationId: users_register_create
+      description: ''
+      parameters:
+      - name: data
+        in: body
+        required: true
+        schema:
+          $ref: '#/definitions/Register'
+      responses:
+        '201':
+          description: ''
+          schema:
+            $ref: '#/definitions/Register'
+      tags:
+      - users
+    parameters: []
+definitions:
+  Profile:
+    required:
+    - nickname
+    - department
+    type: object
+    properties:
+      nickname:
+        title: Nickname
+        type: string
+        maxLength: 128
+        minLength: 1
+      department:
+        title: Department
+        type: string
+        maxLength: 128
+        minLength: 1
+      image:
+        title: Image
+        type: string
+        readOnly: true
+        format: uri
+      xrpl_wallet_address:
+        title: Xrpl wallet address
+        type: string
+        maxLength: 128
+  Post:
+    required:
+    - title
+    - content
+    type: object
+    properties:
+      pk:
+        title: ID
+        type: integer
+        readOnly: true
+      profile:
+        $ref: '#/definitions/Profile'
+      title:
+        title: Title
+        type: string
+        maxLength: 128
+        minLength: 1
+      content:
+        title: Content
+        type: string
+        minLength: 1
+      image:
+        title: Image
+        type: string
+        readOnly: true
+        format: uri
+      likes:
+        type: array
+        items:
           type: integer
-          readOnly: true
-        profile:
-          type: object
-          properties:
-            nickname:
-              type: string
-              maxLength: 128
-            department:
-              type: string
-              maxLength: 128
-            image:
-              type: string
-              format: binary
-          required:
-          - nickname
-          - department
-          readOnly: true
-        title:
-          type: string
-          maxLength: 128
-        content:
-          type: string
-        image:
-          type: string
-          format: binary
-        likes:
-          type: array
-          items:
-            type: integer
-        published_date:
-          type: string
-          format: date-time
-        end_date:
-          type: string
-          format: date-time
-          nullable: true
-      required:
-      - title
-      - content
-    Register:
-      type: object
-      properties:
-        username:
-          type: string
-          description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_
-            only.
-          pattern: ^[\w.@+-]+\z
-          maxLength: 150
-        password:
-          type: string
-          writeOnly: true
-        password2:
-          type: string
-          writeOnly: true
-        email:
-          type: string
-          format: email
-      required:
-      - username
-      - password
-      - password2
-      - email
-    Login:
-      type: object
-      properties:
-        username:
-          type: string
-        password:
-          type: string
-          writeOnly: true
-      required:
-      - username
-      - password
+        uniqueItems: true
+      published_date:
+        title: Published date
+        type: string
+        format: date-time
+      end_date:
+        title: End date
+        type: string
+        format: date-time
+        x-nullable: true
+  Login:
+    required:
+    - username
+    - password
+    type: object
+    properties:
+      username:
+        title: Username
+        type: string
+        minLength: 1
+      password:
+        title: Password
+        type: string
+        minLength: 1
+  Register:
+    required:
+    - username
+    - password
+    - password2
+    - email
+    - xrpl_wallet_address
+    type: object
+    properties:
+      username:
+        title: Username
+        description: Required. 150 characters or fewer. Letters, digits and @/./+/-/_
+          only.
+        type: string
+        pattern: ^[\w.@+-]+$
+        maxLength: 150
+        minLength: 1
+      password:
+        title: Password
+        type: string
+        minLength: 1
+      password2:
+        title: Password2
+        type: string
+        minLength: 1
+      email:
+        title: Email
+        type: string
+        format: email
+        minLength: 1
+      xrpl_wallet_address:
+        title: Xrpl wallet address
+        type: string
+        minLength: 1

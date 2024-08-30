@@ -8,12 +8,20 @@ from django.dispatch import receiver
 # OneToOne 회원 모델
 # username, email, password, nickname, department(소속), image(프로필 이미지)
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
-    nickname = models.CharField(max_length=128)
-    department = models.CharField(max_length=128)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name='profile')
+    nickname = models.CharField(max_length=128, blank=True)
+    department = models.CharField(max_length=128, blank=True)
     image = models.ImageField(upload_to='profile/', default='default.png')
+    xrpl_wallet_address = models.CharField(max_length=255, unique=True, null=True, blank=True)
+
+    def __str__(self):
+        return self.user.username
 
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:
         Profile.objects.create(user=instance)
+
+@receiver(post_save, sender=User)
+def save_user_profile(sender, instance, **kwargs):
+    instance.profile.save()
