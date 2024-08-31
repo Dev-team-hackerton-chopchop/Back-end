@@ -4,13 +4,16 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from django_filters.rest_framework import DjangoFilterBackend
 from .models import Post, Vote
-from .permissions import CustomReadOnly
+
+# from .permissions import CustomReadOnly
+
+from rest_framework.permissions import IsAuthenticated
 from .serializers import PostSerializer, PostCreateSerializer, VoteSerializer
 from .xrpl_utils import create_wallet, cast_vote, tally_votes
 
 class PostViewSet(viewsets.ModelViewSet):
     queryset = Post.objects.all()
-    permission_classes = [CustomReadOnly]
+    permission_classes = [IsAuthenticated]
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['author']
 
