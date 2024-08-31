@@ -1,0 +1,57 @@
+# Python 바이트코드
+__pycache__/
+*.py[cod]
+
+# Django 관련
+*.log
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+
+# 정적 파일 수집 디렉토리
+/static/
+
+# 미디어 파일
+/media/
+
+# 가상 환경
+venv/
+env/
+.env
+
+# IDE 관련 파일
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# 운영체제 관련 파일
+.DS_Store
+Thumbs.db
+
+# 배포 관련 파일
+*.pyc
+*.pyo
+*.pyd
+
+# 테스트 및 커버리지 관련
+.coverage
+htmlcov/
+
+# 임시 파일
+*.bak
+*.tmp
+
+# 로그 파일
+*.log
+
+# 환경 변수 파일
+.env
+.env.local
+.env.*.local
+
+# 기타
+*.sqlite3
+*.pyc
+*.pyo
+*.mo
